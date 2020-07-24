@@ -1,12 +1,12 @@
 ﻿using Happy.Weddings.Gateway.Core.Domain.Identity;
 using Happy.Weddings.Gateway.Core.Infrastructure;
-using Happy.Weddings.Gateway.Core.Messaging.Sender.Identity;
+using Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
 
-namespace Happy.Weddings.Gateway.Messaging.Sender.Identity
+namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
 {
     public class UsernameUpdateSender : IUsernameUpdateSender
     {

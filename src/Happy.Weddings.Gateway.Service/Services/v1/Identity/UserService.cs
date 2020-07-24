@@ -1,35 +1,34 @@
-﻿using Happy.Weddings.Gateway.Core.Config.Blog;
+﻿using Happy.Weddings.Gateway.Core.Config.Identity;
+using Happy.Weddings.Gateway.Core.Domain.Identity;
 using Happy.Weddings.Gateway.Core.DTO;
-using Happy.Weddings.Gateway.Core.DTO.Blog;
+using Happy.Weddings.Gateway.Core.DTO.Identity;
 using Happy.Weddings.Gateway.Core.Infrastructure;
-using Happy.Weddings.Gateway.Core.Services.Blog;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
+using Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity;
+using Happy.Weddings.Gateway.Core.Services.v1.Identity;
 using Newtonsoft.Json;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Happy.Weddings.Gateway.Service.Services.Blog
+namespace Happy.Weddings.Gateway.Service.Services.v1.Identity
 {
     /// <summary>
-    /// Service implementation for post related operations
+    /// Service implementation for user related operations
     /// </summary>
-    public class StoryService : IStoryService
+    public class UserService : IUserService
     {
+        /// <summary>
+        /// The username update sender
+        /// </summary>
+        private readonly IUsernameUpdateSender usernameUpdateSender;
+
         /// <summary>
         /// The HTTP client factory
         /// </summary>
         private readonly IHttpClientFactory httpClientFactory;
-
-        /// <summary>
-        /// The distributed cache
-        /// </summary>
-        private readonly IDistributedCache distributedCache;
 
         /// <summary>
         /// The services configuration
@@ -44,154 +43,136 @@ namespace Happy.Weddings.Gateway.Service.Services.Blog
         /// <summary>
         /// Initializes a new instance of the <see cref="StoryService" /> class.
         /// </summary>
+        /// <param name="usernameUpdateSender">The username update sender.</param>
         /// <param name="httpClientFactory">The HTTP client factory.</param>
-        /// <param name="distributedCache">The distributed cache.</param>
         /// <param name="servicesConfig">The services configuration.</param>
         /// <param name="logger">The logger.</param>
-        public StoryService(
+        public UserService(
+            IUsernameUpdateSender usernameUpdateSender,
             IHttpClientFactory httpClientFactory,
-            IDistributedCache distributedCache,
             ServicesConfig servicesConfig,
             ILogger logger)
         {
+            this.usernameUpdateSender = usernameUpdateSender;
             this.httpClientFactory = httpClientFactory;
-            this.distributedCache = distributedCache;
             this.servicesConfig = servicesConfig;
             this.logger = logger;
         }
 
         /// <summary>
-        /// Gets the stories.
+        /// Gets the users.
         /// </summary>
         /// <returns></returns>
-        public async Task<APIResponse> GetStories()
+        public async Task<APIResponse> GetUsers()
         {
             try
             {
-                string serializedStories;
-                List<StoryResponse> stories;
-
-                var encodedStories = await distributedCache.GetAsync(BlogServiceOperation.GetStoriesCacheName);
-
-                if (encodedStories != null)
-                {
-                    serializedStories = Encoding.UTF8.GetString(encodedStories);
-                    stories = JsonConvert.DeserializeObject<List<StoryResponse>>(serializedStories);
-                }
-                else
-                {
-                    var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
-                    var response = await client.GetAsync(servicesConfig.Blog + BlogServiceOperation.GetStories());
-                    var result = JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
-                    stories = result.Value as List<StoryResponse>;
-
-                    serializedStories = JsonConvert.SerializeObject(stories);
-                    encodedStories = Encoding.UTF8.GetBytes(serializedStories);
-                    var options = new DistributedCacheEntryOptions()
-                                    .SetSlidingExpiration(TimeSpan.FromMinutes(1))
-                                    .SetAbsoluteExpiration(DateTime.Now.AddHours(1));
-
-                    await distributedCache.SetAsync(BlogServiceOperation.GetStoriesCacheName, encodedStories, options);
-                }
-
-                return new APIResponse(stories, HttpStatusCode.OK);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception in method 'GetStories()'");
-                var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
-            }
-        }
-
-        /// <summary>
-        /// Gets the story.
-        /// </summary>
-        /// <param name="details">The details.</param>
-        /// <returns></returns>
-        public async Task<APIResponse> GetStory(StoryIdDetails details)
-        {
-            try
-            {
-                var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
-                var response = await client.GetAsync(servicesConfig.Blog + BlogServiceOperation.GetStory(details.StoryId));
+                var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
+                var response = await client.GetAsync(servicesConfig.Identity + IdentityServiceOperation.GetUsers());
                 return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Exception in method 'GetStory()'");
+                logger.Error(ex, "Exception in method 'GetUsers()'");
                 var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
             }
         }
 
         /// <summary>
-        /// Creates the story.
+        /// Gets the user.
         /// </summary>
-        /// <param name="request">The request.</param>
+        /// <param name="details">The details.</param>
         /// <returns></returns>
-        public async Task<APIResponse> CreateStory(CreateStoryRequest request)
+        public async Task<APIResponse> GetUser(UserIdDetails details)
         {
             try
             {
-                var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
+                var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
+                var response = await client.GetAsync(servicesConfig.Identity + IdentityServiceOperation.GetUser(details.UserId));
+                return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception in method 'GetUser()'");
+                var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Creates the user.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        public async Task<APIResponse> CreateUser(CreateUserRequest request)
+        {
+            try
+            {
+                var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
 
                 var param = JsonConvert.SerializeObject(request);
                 HttpContent contentPost = new StringContent(param, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync(servicesConfig.Blog + BlogServiceOperation.CreateStory(), contentPost);
+                var response = await client.PostAsync(servicesConfig.Identity + IdentityServiceOperation.CreateUser(), contentPost);
                 return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Exception in method 'CreateStory()'");
+                logger.Error(ex, "Exception in method 'CreateUser()'");
                 var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
             }
         }
 
         /// <summary>
-        /// Updates the story.
+        /// Updates the user.
         /// </summary>
         /// <param name="details">The details.</param>
         /// <param name="request">The request.</param>
         /// <returns></returns>
-        public async Task<APIResponse> UpdateStory(StoryIdDetails details, UpdateStoryRequest request)
+        public async Task<APIResponse> UpdateUser(UserIdDetails details, UpdateUserRequest request)
         {
             try
             {
-                var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
+                var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
 
                 var param = JsonConvert.SerializeObject(request);
                 HttpContent contentPost = new StringContent(param, Encoding.UTF8, "application/json");
 
-                var response = await client.PutAsync(servicesConfig.Blog + BlogServiceOperation.UpdateStory(details.StoryId), contentPost);
+                var response = await client.PutAsync(servicesConfig.Identity + IdentityServiceOperation.UpdateUser(details.UserId), contentPost);
+                if (response.StatusCode == HttpStatusCode.NoContent)
+                {
+                    var user = new User { Id = details.UserId, FirstName = request.FirstName, LastName = request.LastName };
+                    usernameUpdateSender.SendUserName(user);
+                }
+
                 return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Exception in method 'UpdateStory()'");
+                logger.Error(ex, "Exception in method 'UpdateUser()'");
                 var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
             }
         }
 
         /// <summary>
-        /// Deletes the story.
+        /// Deletes the user.
         /// </summary>
         /// <param name="details">The details.</param>
         /// <returns></returns>
-        public async Task<APIResponse> DeleteStory(StoryIdDetails details)
+        public async Task<APIResponse> DeleteUser(UserIdDetails details)
         {
             try
             {
-                var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
-                var response = await client.DeleteAsync(servicesConfig.Blog + BlogServiceOperation.DeleteStory(details.StoryId));
+                var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
+                var response = await client.DeleteAsync(servicesConfig.Identity + IdentityServiceOperation.DeleteUser(details.UserId));
                 return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Exception in method 'DeleteStory()'");
+                logger.Error(ex, "Exception in method 'DeleteUser()'");
                 var exMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return new APIResponse(exMessage, HttpStatusCode.InternalServerError);
             }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Happy.Weddings.Gateway.API.Filters;
 using Happy.Weddings.Gateway.Core.DTO.Blog;
-using Happy.Weddings.Gateway.Core.Services.Blog;
+using Happy.Weddings.Gateway.Core.Services.v1.Blog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +15,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
     [Consumes("application/json")]
     [Route("api/v1/blogs/stories")]
     [ApiController]
-    public class StoriesController : Controller
+    public class StoriesController : ControllerBase
     {
         /// <summary>
         /// The story service
@@ -23,7 +23,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         private readonly IStoryService storyService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UsersController"/> class.
+        /// Initializes a new instance of the <see cref="StoriesController"/> class.
         /// </summary>
         /// <param name="storyService">The story service.</param>
         public StoriesController(

@@ -54,7 +54,7 @@ namespace Happy.Weddings.Gateway.API
                 .AddHealthChecks(Configuration)
                 .AddCircuitBreakers(Configuration)
                 .AddRedisCacheExchange(Configuration)
-                .AddInjectionLifetimeConfiguration(HostingEnvironment, Configuration)
+                .AddServicesInjection(HostingEnvironment, Configuration)
                 .ForwardHeaders()
                 .AddControllers();
         }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Happy.Weddings.Gateway.Core.DTO.Identity;
-using Happy.Weddings.Gateway.Core.Services.Identity;
+using Happy.Weddings.Gateway.Core.Services.v1.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
+namespace Happy.Weddings.Gateway.API.Controllers.v1.Identity
 {
     /// <summary>
     /// Identity users operations handled by this controller
@@ -14,7 +14,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
     [Consumes("application/json")]
     [Route("api/v1/users")]
     [ApiController]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         /// <summary>
         /// The story service

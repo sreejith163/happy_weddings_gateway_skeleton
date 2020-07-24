@@ -1,6 +1,6 @@
 ﻿using Happy.Weddings.Gateway.Core.Domain.Identity;
 
-namespace Happy.Weddings.Gateway.Core.Messaging.Sender.Identity
+namespace Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity
 {
     public interface IUsernameUpdateSender
     {

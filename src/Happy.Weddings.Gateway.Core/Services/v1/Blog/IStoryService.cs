@@ -2,7 +2,7 @@
 using Happy.Weddings.Gateway.Core.DTO.Blog;
 using System.Threading.Tasks;
 
-namespace Happy.Weddings.Gateway.Core.Services.Blog
+namespace Happy.Weddings.Gateway.Core.Services.v1.Blog
 {
     /// <summary>
     /// Service interface for post related operations

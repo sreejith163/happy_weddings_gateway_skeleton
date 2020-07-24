@@ -2,7 +2,7 @@
 using Happy.Weddings.Gateway.Core.DTO.Identity;
 using System.Threading.Tasks;
 
-namespace Happy.Weddings.Gateway.Core.Services.Identity
+namespace Happy.Weddings.Gateway.Core.Services.v1.Identity
 {
     /// <summary>
     /// Service interface for user related operations
