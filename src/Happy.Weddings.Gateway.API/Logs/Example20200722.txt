@@ -1,0 +1,134 @@
+[2020-07-22 17:53:21.138 +05:30] [Information] [IP: ::1] [Thread ID : 4] Start processing HTTP request "POST" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 17:53:21.337 +05:30] [Information] [IP: ::1] [Thread ID : 4] Sending HTTP request "POST" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 17:53:26.074 +05:30] [Error] [IP: ::1] [Thread ID : 6] Exception in method 'CreateStory()' 
+ System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.CreateStory(CreateStoryRequest request) in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 104
+[2020-07-22 17:53:30.180 +05:30] [Information] [IP: ::1] [Thread ID : 4] Start processing HTTP request "POST" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 17:53:30.257 +05:30] [Error] [IP: ::1] [Thread ID : 4] Exception in method 'CreateStory()' 
+ Polly.CircuitBreaker.BrokenCircuitException: The circuit is now open and is not allowing calls.
+ ---> System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.CreateStory(CreateStoryRequest request) in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 104
+   --- End of inner exception stack trace ---
+   at Polly.CircuitBreaker.CircuitStateController`1.OnActionPreExecute()
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.CreateStory(CreateStoryRequest request) in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 104
+[2020-07-22 17:53:32.398 +05:30] [Information] [IP: ::1] [Thread ID : 15] Start processing HTTP request "POST" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 17:53:32.440 +05:30] [Error] [IP: ::1] [Thread ID : 15] Exception in method 'CreateStory()' 
+ Polly.CircuitBreaker.BrokenCircuitException: The circuit is now open and is not allowing calls.
+ ---> System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.CreateStory(CreateStoryRequest request) in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 104
+   --- End of inner exception stack trace ---
+   at Polly.CircuitBreaker.CircuitStateController`1.OnActionPreExecute()
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.CreateStory(CreateStoryRequest request) in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 104
+[2020-07-22 17:53:50.426 +05:30] [Information] [IP: ::1] [Thread ID : 15] Start processing HTTP request "POST" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 18:00:06.140 +05:30] [Information] [IP: ::1] [Thread ID : 7] Start processing HTTP request "GET" https://localhost:44309/api/v1/blogs/hc 
+ [2020-07-22 18:00:06.140 +05:30] [Information] [IP: ::1] [Thread ID : 9] Start processing HTTP request "GET" https://localhost:44334/api/v1/identity/hc 
+ [2020-07-22 18:00:06.154 +05:30] [Information] [IP: ::1] [Thread ID : 9] Sending HTTP request "GET" https://localhost:44334/api/v1/identity/hc 
+ [2020-07-22 18:00:06.154 +05:30] [Information] [IP: ::1] [Thread ID : 7] Sending HTTP request "GET" https://localhost:44309/api/v1/blogs/hc 
+ [2020-07-22 18:00:09.679 +05:30] [Information] [IP: ::1] [Thread ID : 10] Start processing HTTP request "GET" https://localhost:44334/api/v1/identity/hc 
+ [2020-07-22 18:00:09.679 +05:30] [Information] [IP: ::1] [Thread ID : 4] Start processing HTTP request "GET" https://localhost:44309/api/v1/blogs/hc 
+ [2020-07-22 18:00:09.680 +05:30] [Information] [IP: ::1] [Thread ID : 10] Sending HTTP request "GET" https://localhost:44334/api/v1/identity/hc 
+ [2020-07-22 18:00:09.680 +05:30] [Information] [IP: ::1] [Thread ID : 4] Sending HTTP request "GET" https://localhost:44309/api/v1/blogs/hc 
+ [2020-07-22 18:00:09.708 +05:30] [Error] [IP: ::1] [Thread ID : 20] Health check "Identity Service" completed after 3615.0522ms with status Unhealthy and 'null' 
+ [2020-07-22 18:00:09.708 +05:30] [Error] [IP: ::1] [Thread ID : 19] Health check "Blogs Service" completed after 3615.0505ms with status Unhealthy and 'null' 
+ [2020-07-22 18:00:13.778 +05:30] [Error] [IP: ::1] [Thread ID : 19] Health check "Identity Service" completed after 4103.5576ms with status Unhealthy and 'null' 
+ [2020-07-22 18:00:13.778 +05:30] [Error] [IP: ::1] [Thread ID : 6] Health check "Blogs Service" completed after 4103.5277ms with status Unhealthy and 'null' 
+ [2020-07-22 18:47:54.790 +05:30] [Information] [IP: ::1] [Thread ID : 4] Start processing HTTP request "GET" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 18:47:54.816 +05:30] [Information] [IP: ::1] [Thread ID : 4] Sending HTTP request "GET" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 18:47:59.814 +05:30] [Error] [IP: ::1] [Thread ID : 5] Exception in method 'GetStories()' 
+ System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.GetStories() in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 58
+[2020-07-22 21:08:36.037 +05:30] [Information] [IP: ::1] [Thread ID : 16] Start processing HTTP request "GET" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 21:08:36.058 +05:30] [Information] [IP: ::1] [Thread ID : 16] Sending HTTP request "GET" https://localhost:44309/api/v1/blogs/stories 
+ [2020-07-22 21:08:40.406 +05:30] [Error] [IP: ::1] [Thread ID : 21] Exception in method 'GetStories()' 
+ System.Net.Http.HttpRequestException: No connection could be made because the target machine actively refused it.
+ ---> System.Net.Sockets.SocketException (10061): No connection could be made because the target machine actively refused it.
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Polly.CircuitBreaker.AsyncCircuitBreakerEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, ICircuitController`1 breakerController)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Happy.Weddings.Gateway.Service.Services.Blog.StoryService.GetStories() in E:\HappyWeddings\Gateway\src\Happy.Weddings.Gateway.Service\Services\Blog\StoryService.cs:line 61

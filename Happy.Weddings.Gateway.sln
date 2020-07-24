@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D1AA1363-AE47-4B5C-9730-F8546FDA542D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happy.Weddings.Gateway.Core", "src\Happy.Weddings.Gateway.Core\Happy.Weddings.Gateway.Core.csproj", "{EEA04F50-8FE3-45A1-9C4F-AAB526040259}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happy.Weddings.Gateway.Service", "src\Happy.Weddings.Gateway.Service\Happy.Weddings.Gateway.Service.csproj", "{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happy.Weddings.Gateway.Infrastructure", "src\Happy.Weddings.Gateway.Infrastructure\Happy.Weddings.Gateway.Infrastructure.csproj", "{806059C9-998F-4955-BED9-595923032DA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happy.Weddings.Gateway.API", "src\Happy.Weddings.Gateway.API\Happy.Weddings.Gateway.API.csproj", "{00350DC8-7AB4-404E-8F7B-CBECA2F57186}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Happy.Weddings.Gateway.MessageBroker", "src\Happy.Weddings.Gateway.Messaging\Happy.Weddings.Gateway.Messaging.csproj", "{6DE01A2D-413C-4AED-9663-019798A11CD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEA04F50-8FE3-45A1-9C4F-AAB526040259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA04F50-8FE3-45A1-9C4F-AAB526040259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA04F50-8FE3-45A1-9C4F-AAB526040259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA04F50-8FE3-45A1-9C4F-AAB526040259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{806059C9-998F-4955-BED9-595923032DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{806059C9-998F-4955-BED9-595923032DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{806059C9-998F-4955-BED9-595923032DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{806059C9-998F-4955-BED9-595923032DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00350DC8-7AB4-404E-8F7B-CBECA2F57186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00350DC8-7AB4-404E-8F7B-CBECA2F57186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00350DC8-7AB4-404E-8F7B-CBECA2F57186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00350DC8-7AB4-404E-8F7B-CBECA2F57186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE01A2D-413C-4AED-9663-019798A11CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE01A2D-413C-4AED-9663-019798A11CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE01A2D-413C-4AED-9663-019798A11CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE01A2D-413C-4AED-9663-019798A11CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEA04F50-8FE3-45A1-9C4F-AAB526040259} = {D1AA1363-AE47-4B5C-9730-F8546FDA542D}
+		{4AE0CCC6-F21F-4182-A981-75C8A09D5C8C} = {D1AA1363-AE47-4B5C-9730-F8546FDA542D}
+		{806059C9-998F-4955-BED9-595923032DA3} = {D1AA1363-AE47-4B5C-9730-F8546FDA542D}
+		{00350DC8-7AB4-404E-8F7B-CBECA2F57186} = {D1AA1363-AE47-4B5C-9730-F8546FDA542D}
+		{6DE01A2D-413C-4AED-9663-019798A11CD7} = {D1AA1363-AE47-4B5C-9730-F8546FDA542D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {376DCA2E-0B7A-4F1A-AA4A-586FDFA4E5D9}
+	EndGlobalSection
+EndGlobal
