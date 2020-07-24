@@ -15,6 +15,11 @@ namespace Happy.Weddings.Gateway.Core.Config.Blog
         public static string serviceName = "BlogService";
 
         /// <summary>
+        /// The get stories cache name
+        /// </summary>
+        public static string GetStoriesCacheName = "GetStoriesCache()";
+
+        /// <summary>
         /// Gets the health.
         /// </summary>
         /// <returns></returns>

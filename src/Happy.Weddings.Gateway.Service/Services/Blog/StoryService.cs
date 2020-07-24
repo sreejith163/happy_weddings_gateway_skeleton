@@ -68,12 +68,10 @@ namespace Happy.Weddings.Gateway.Service.Services.Blog
         {
             try
             {
-                var cacheKey = "GetStoriesCache";
-
                 string serializedStories;
                 List<StoryResponse> stories;
 
-                var encodedStories = await distributedCache.GetAsync(cacheKey);
+                var encodedStories = await distributedCache.GetAsync(BlogServiceOperation.GetStoriesCacheName);
 
                 if (encodedStories != null)
                 {
@@ -93,7 +91,7 @@ namespace Happy.Weddings.Gateway.Service.Services.Blog
                                     .SetSlidingExpiration(TimeSpan.FromMinutes(1))
                                     .SetAbsoluteExpiration(DateTime.Now.AddHours(1));
 
-                    await distributedCache.SetAsync(cacheKey, encodedStories, options);
+                    await distributedCache.SetAsync(BlogServiceOperation.GetStoriesCacheName, encodedStories, options);
                 }
 
                 return new APIResponse(stories, HttpStatusCode.OK);
