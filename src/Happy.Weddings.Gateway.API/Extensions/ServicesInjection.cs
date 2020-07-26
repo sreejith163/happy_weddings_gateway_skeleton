@@ -1,11 +1,11 @@
 ﻿using Happy.Weddings.Gateway.Core.Infrastructure;
 using Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity;
-using Happy.Weddings.Gateway.Core.Services.v1.Blog;
-using Happy.Weddings.Gateway.Core.Services.v1.Identity;
+using Happy.Weddings.Gateway.Core.Services.v1.Blog.Story;
+using Happy.Weddings.Gateway.Core.Services.v1.Identity.User;
 using Happy.Weddings.Gateway.Infrastructure;
 using Happy.Weddings.Gateway.Messaging.Sender.v1.Identity;
-using Happy.Weddings.Gateway.Service.Services.v1.Blog;
-using Happy.Weddings.Gateway.Service.Services.v1.Identity;
+using Happy.Weddings.Gateway.Service.Services.v1.Blog.Story;
+using Happy.Weddings.Gateway.Service.Services.v1.Identity.Story;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

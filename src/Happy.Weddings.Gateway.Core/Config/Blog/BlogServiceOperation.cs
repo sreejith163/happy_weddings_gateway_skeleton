@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Happy.Weddings.Gateway.Core.Config.Blog
+﻿namespace Happy.Weddings.Gateway.Core.Config.Blog
 {
     public class BlogServiceOperation
     {
@@ -23,7 +21,7 @@ namespace Happy.Weddings.Gateway.Core.Config.Blog
         /// Gets the health.
         /// </summary>
         /// <returns></returns>
-        public static string GetHealth() => $"{baseUrl}/hc";
+        public static string GetHealth() => $"/hc";
 
         /// <summary>
         /// Gets the stories.
@@ -36,7 +34,7 @@ namespace Happy.Weddings.Gateway.Core.Config.Blog
         /// </summary>
         /// <param name="storyId">The story identifier.</param>
         /// <returns></returns>
-        public static string GetStory(Guid storyId) => $"{baseUrl}/stories/{storyId}";
+        public static string GetStory(int storyId) => $"{baseUrl}/stories/{storyId}";
 
         /// <summary>
         /// Creates the story.
@@ -49,13 +47,13 @@ namespace Happy.Weddings.Gateway.Core.Config.Blog
         /// </summary>
         /// <param name="storyId">The story identifier.</param>
         /// <returns></returns>
-        public static string UpdateStory(Guid storyId) => $"{baseUrl}/stories/{storyId}";
+        public static string UpdateStory(int storyId) => $"{baseUrl}/stories/{storyId}";
 
         /// <summary>
         /// Deletes the story.
         /// </summary>
         /// <param name="storyId">The story identifier.</param>
         /// <returns></returns>
-        public static string DeleteStory(Guid storyId) => $"{baseUrl}/stories/{storyId}";
+        public static string DeleteStory(int storyId) => $"{baseUrl}/stories/{storyId}";
     }
 }

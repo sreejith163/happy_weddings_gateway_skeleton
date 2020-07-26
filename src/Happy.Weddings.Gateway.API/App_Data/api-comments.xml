@@ -69,7 +69,7 @@
             The story service
             </summary>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.#ctor(Happy.Weddings.Gateway.Core.Services.v1.Blog.IStoryService)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.#ctor(Happy.Weddings.Gateway.Core.Services.v1.Blog.Story.IStoryService)">
             <summary>
             Initializes a new instance of the <see cref="T:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController"/> class.
             </summary>
@@ -81,7 +81,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.GetStory(System.Guid)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.GetStory(System.Int32)">
             <summary>
             Gets the story.
             </summary>
@@ -95,7 +95,7 @@
             <param name="request">The request.</param>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.UpdateStory(System.Guid,Happy.Weddings.Gateway.Core.DTO.Blog.UpdateStoryRequest)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.UpdateStory(System.Int32,Happy.Weddings.Gateway.Core.DTO.Blog.UpdateStoryRequest)">
             <summary>
             Updates the story.
             </summary>
@@ -103,7 +103,7 @@
             <param name="request">The request.</param>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.DeleteStory(System.Guid)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.DeleteStory(System.Int32)">
             <summary>
             Deletes the story.
             </summary>
@@ -120,7 +120,7 @@
             The story service
             </summary>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.#ctor(Happy.Weddings.Gateway.Core.Services.v1.Identity.IUserService)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.#ctor(Happy.Weddings.Gateway.Core.Services.v1.Identity.User.IUserService)">
             <summary>
             Initializes a new instance of the <see cref="T:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController" /> class.
             </summary>

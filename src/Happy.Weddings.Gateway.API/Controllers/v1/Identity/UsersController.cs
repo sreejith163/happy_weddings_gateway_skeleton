@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Happy.Weddings.Gateway.Core.DTO.Identity;
-using Happy.Weddings.Gateway.Core.Services.v1.Identity;
+using Happy.Weddings.Gateway.Core.Services.v1.Identity.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

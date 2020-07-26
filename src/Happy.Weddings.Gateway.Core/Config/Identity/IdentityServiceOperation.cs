@@ -18,7 +18,7 @@ namespace Happy.Weddings.Gateway.Core.Config.Identity
         /// Gets the health.
         /// </summary>
         /// <returns></returns>
-        public static string GetHealth() => $"{baseUrl}/hc";
+        public static string GetHealth() => $"/hc";
 
         /// <summary>
         /// Gets the users.

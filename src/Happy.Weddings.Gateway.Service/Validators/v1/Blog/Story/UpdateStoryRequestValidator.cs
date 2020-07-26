@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
 using Happy.Weddings.Gateway.Core.DTO.Blog;
 
-namespace Happy.Weddings.Gateway.Service.Validators.v1.Blog
+namespace Happy.Weddings.Gateway.Service.Validators.v1.Blog.Story
 {
-    public class CreateStoryRequestValidator : AbstractValidator<CreateStoryRequest>
+    public class UpdateStoryRequestValidator : AbstractValidator<UpdateStoryRequest>
     {
-        public CreateStoryRequestValidator()
+        public UpdateStoryRequestValidator()
         {
             RuleFor(x => x.Title).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Author).NotEmpty();
-            RuleFor(x => x.CreatedBy).NotEmpty();
+            RuleFor(x => x.UpdatedBy).NotEmpty();
         }
     }
 }

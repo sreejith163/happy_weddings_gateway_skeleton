@@ -1,47 +1,47 @@
 ﻿using Happy.Weddings.Gateway.Core.DTO;
-using Happy.Weddings.Gateway.Core.DTO.Blog;
+using Happy.Weddings.Gateway.Core.DTO.Identity;
 using System.Threading.Tasks;
 
-namespace Happy.Weddings.Gateway.Core.Services.v1.Blog
+namespace Happy.Weddings.Gateway.Core.Services.v1.Identity.User
 {
     /// <summary>
-    /// Service interface for post related operations
+    /// Service interface for user related operations
     /// </summary>
-    public interface IStoryService
+    public interface IUserService
     {
         /// <summary>
-        /// Gets the stories.
+        /// Gets the users.
         /// </summary>
         /// <returns></returns>
-        Task<APIResponse> GetStories();
+        Task<APIResponse> GetUsers();
 
         /// <summary>
-        /// Gets the story.
+        /// Gets the user.
         /// </summary>
         /// <param name="details">The details.</param>
         /// <returns></returns>
-        Task<APIResponse> GetStory(StoryIdDetails details);
+        Task<APIResponse> GetUser(UserIdDetails details);
 
         /// <summary>
-        /// Creates the story.
+        /// Creates the user.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <returns></returns>
-        Task<APIResponse> CreateStory(CreateStoryRequest request);
+        Task<APIResponse> CreateUser(CreateUserRequest request);
 
         /// <summary>
-        /// Updates the story.
+        /// Updates the user.
         /// </summary>
         /// <param name="details">The details.</param>
         /// <param name="request">The request.</param>
         /// <returns></returns>
-        Task<APIResponse> UpdateStory(StoryIdDetails details, UpdateStoryRequest request);
+        Task<APIResponse> UpdateUser(UserIdDetails details, UpdateUserRequest request);
 
         /// <summary>
-        /// Deletes the story.
+        /// Deletes the user.
         /// </summary>
         /// <param name="details">The details.</param>
         /// <returns></returns>
-        Task<APIResponse> DeleteStory(StoryIdDetails details);
+        Task<APIResponse> DeleteUser(UserIdDetails details);
     }
 }

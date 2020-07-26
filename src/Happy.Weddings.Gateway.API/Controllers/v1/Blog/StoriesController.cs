@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Happy.Weddings.Gateway.API.Filters;
 using Happy.Weddings.Gateway.Core.DTO.Blog;
-using Happy.Weddings.Gateway.Core.Services.v1.Blog;
+using Happy.Weddings.Gateway.Core.Services.v1.Blog.Story;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,7 +50,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         /// <returns></returns>
         [Route("{storyId}")]
         [HttpGet]
-        public async Task<IActionResult> GetStory(Guid storyId)
+        public async Task<IActionResult> GetStory(int storyId)
         {
             var result = await storyService.GetStory(new StoryIdDetails(storyId));
             return StatusCode((int)result.Code, result.Value);
@@ -63,7 +62,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         /// <param name="request">The request.</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles = "Admin, Vendor")]
+        //[Authorize(Roles = "Admin, Vendor")]
         public async Task<IActionResult> CreateStory([FromBody] CreateStoryRequest request)
         {
             var result = await storyService.CreateStory(request);
@@ -79,7 +78,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         [Route("{storyId}")]
         [HttpPut]
         [Authorize(Roles = "Admin, Vendor")]
-        public async Task<IActionResult> UpdateStory(Guid storyId, [FromBody] UpdateStoryRequest request)
+        public async Task<IActionResult> UpdateStory(int storyId, [FromBody] UpdateStoryRequest request)
         {
             var result = await storyService.UpdateStory(new StoryIdDetails(storyId), request);
             return StatusCode((int)result.Code, result.Value);
@@ -93,7 +92,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         [Route("{storyId}")]
         [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteStory(Guid storyId)
+        public async Task<IActionResult> DeleteStory(int storyId)
         {
             var result = await storyService.DeleteStory(new StoryIdDetails(storyId));
             return StatusCode((int)result.Code, result.Value);
