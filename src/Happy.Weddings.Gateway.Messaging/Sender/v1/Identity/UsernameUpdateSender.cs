@@ -1,7 +1,6 @@
 ﻿using Happy.Weddings.Gateway.Core.Domain.Identity;
 using Happy.Weddings.Gateway.Core.Infrastructure;
 using Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
@@ -54,19 +53,17 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// <param name="user">The user.</param>
         public void SendUserName(User user)
         {
-            var messagefactory = new ConnectionFactory() { HostName = hostname, UserName = username, Password = password };
+            var factory = new ConnectionFactory() { HostName = hostname, UserName = username, Password = password };
 
-            using (var connection = messagefactory.CreateConnection())
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
             {
-                using (var channel = connection.CreateModel())
-                {
-                    channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
+                channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-                    var json = JsonConvert.SerializeObject(user);
-                    var body = Encoding.UTF8.GetBytes(json);
+                var json = JsonConvert.SerializeObject(user);
+                var body = Encoding.UTF8.GetBytes(json);
 
-                    channel.BasicPublish(exchange: exchangeName, routingKey: "", basicProperties: null, body: body);
-                }
+                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
             }
         }
     }
