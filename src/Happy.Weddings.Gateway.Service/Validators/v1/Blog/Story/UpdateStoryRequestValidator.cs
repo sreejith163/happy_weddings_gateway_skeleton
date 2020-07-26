@@ -9,7 +9,6 @@ namespace Happy.Weddings.Gateway.Service.Validators.v1.Blog.Story
         {
             RuleFor(x => x.Title).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
-            RuleFor(x => x.Author).NotEmpty();
             RuleFor(x => x.UpdatedBy).NotEmpty();
         }
     }

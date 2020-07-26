@@ -3,6 +3,7 @@ using Happy.Weddings.Gateway.Core.DTO;
 using Happy.Weddings.Gateway.Core.DTO.Blog;
 using Happy.Weddings.Gateway.Core.Infrastructure;
 using Happy.Weddings.Gateway.Core.Services.v1.Blog.Story;
+using Happy.Weddings.Gateway.Service.Helpers;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
@@ -63,8 +64,9 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
         /// <summary>
         /// Gets the stories.
         /// </summary>
+        /// <param name="storyParametersRequest">The story parameters request.</param>
         /// <returns></returns>
-        public async Task<APIResponse> GetStories()
+        public async Task<APIResponse> GetStories(StoryParametersRequest storyParametersRequest)
         {
             try
             {
@@ -81,9 +83,12 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
                 else
                 {
                     var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
-                    var response = await client.GetAsync(servicesConfig.Blog + BlogServiceOperation.GetStories());
-                    var result = JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
-                    stories = result.Value as List<StoryResponse>;
+
+                    UriBuilder url = new UriBuilder(servicesConfig.Blog + BlogServiceOperation.GetStories());
+                    url.Query = QueryStringHelper.ConvertToQueryString(storyParametersRequest);
+
+                    var response = await client.GetAsync(url.ToString());
+                    stories = JsonConvert.DeserializeObject<List<StoryResponse>>(await response.Content.ReadAsStringAsync());
 
                     serializedStories = JsonConvert.SerializeObject(stories);
                     encodedStories = Encoding.UTF8.GetBytes(serializedStories);
@@ -115,7 +120,14 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
             {
                 var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
                 var response = await client.GetAsync(servicesConfig.Blog + BlogServiceOperation.GetStory(details.StoryId));
-                return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var story = JsonConvert.DeserializeObject<StoryResponseDetails>(await response.Content.ReadAsStringAsync());
+                    return new APIResponse(story, HttpStatusCode.OK);
+                }
+
+                return new APIResponse(response.StatusCode);
             }
             catch (Exception ex)
             {
@@ -140,7 +152,13 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
                 HttpContent contentPost = new StringContent(param, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync(servicesConfig.Blog + BlogServiceOperation.CreateStory(), contentPost);
-                return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
+                if (response.IsSuccessStatusCode)
+                {
+                    var story = JsonConvert.DeserializeObject<StoryResponse>(await response.Content.ReadAsStringAsync());
+                    return new APIResponse(story, HttpStatusCode.Created);
+                }
+
+                return new APIResponse(response.StatusCode);
             }
             catch (Exception ex)
             {
@@ -166,7 +184,7 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
                 HttpContent contentPost = new StringContent(param, Encoding.UTF8, "application/json");
 
                 var response = await client.PutAsync(servicesConfig.Blog + BlogServiceOperation.UpdateStory(details.StoryId), contentPost);
-                return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
+                return new APIResponse(response.StatusCode);
             }
             catch (Exception ex)
             {
@@ -186,8 +204,9 @@ namespace Happy.Weddings.Gateway.Service.Services.v1.Blog.Story
             try
             {
                 var client = httpClientFactory.CreateClient(BlogServiceOperation.serviceName);
+
                 var response = await client.DeleteAsync(servicesConfig.Blog + BlogServiceOperation.DeleteStory(details.StoryId));
-                return JsonConvert.DeserializeObject<APIResponse>(await response.Content.ReadAsStringAsync());
+                return new APIResponse(response.StatusCode);
             }
             catch (Exception ex)
             {

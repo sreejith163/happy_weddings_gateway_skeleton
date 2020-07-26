@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Happy.Weddings.Gateway.Core.DTO.Blog
 {
@@ -7,7 +8,7 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
-        public Guid Id { get; set; }
+        public int StoryId { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
@@ -20,6 +21,11 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the author.
         /// </summary>
         public string Author { get; set; }
@@ -27,21 +33,23 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         /// <summary>
         /// Gets or sets the created by.
         /// </summary>
-        public Guid CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the created on.
         /// </summary>
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the updated by.
         /// </summary>
-        public Guid UpdatedBy { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string UpdatedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the updated on.
         /// </summary>
-        public DateTime UpdatedOn { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public DateTime UpdatedDate { get; set; }
     }
 }

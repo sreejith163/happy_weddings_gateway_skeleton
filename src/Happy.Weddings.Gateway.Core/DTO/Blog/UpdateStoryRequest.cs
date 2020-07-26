@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Happy.Weddings.Gateway.Core.DTO.Blog
+﻿namespace Happy.Weddings.Gateway.Core.DTO.Blog
 {
     public class UpdateStoryRequest
     {
@@ -15,13 +13,8 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the author.
-        /// </summary>
-        public string Author { get; set; }
-
-        /// <summary>
         /// Gets or sets the created by.
         /// </summary>
-        public Guid UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

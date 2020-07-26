@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Happy.Weddings.Gateway.Core.DTO.Blog
+﻿namespace Happy.Weddings.Gateway.Core.DTO.Blog
 {
     public class CreateStoryRequest
     {
@@ -15,6 +13,11 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the author.
         /// </summary>
         public string Author { get; set; }
@@ -22,6 +25,6 @@ namespace Happy.Weddings.Gateway.Core.DTO.Blog
         /// <summary>
         /// Gets or sets the created by.
         /// </summary>
-        public Guid CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

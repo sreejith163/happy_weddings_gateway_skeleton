@@ -12,8 +12,9 @@ namespace Happy.Weddings.Gateway.Core.Services.v1.Blog.Story
         /// <summary>
         /// Gets the stories.
         /// </summary>
+        /// <param name="storyParametersRequest">The story parameters request.</param>
         /// <returns></returns>
-        Task<APIResponse> GetStories();
+        Task<APIResponse> GetStories(StoryParametersRequest storyParametersRequest);
 
         /// <summary>
         /// Gets the story.

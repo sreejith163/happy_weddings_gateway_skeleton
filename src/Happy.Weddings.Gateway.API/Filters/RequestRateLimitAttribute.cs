@@ -19,9 +19,9 @@ namespace Happy.Weddings.Gateway.API.Filters
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the minutes.
+        /// Gets or sets the seconds.
         /// </summary>
-        public int Minutes { get; set; }
+        public int Seconds { get; set; }
 
         /// <summary>
         /// Gets the cache.
@@ -44,7 +44,7 @@ namespace Happy.Weddings.Gateway.API.Filters
             if (!Cache.TryGetValue(memoryCacheKey, out bool entry))
             {
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(Minutes));
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(Seconds));
 
                 Cache.Set(memoryCacheKey, true, cacheEntryOptions);
             }
@@ -52,7 +52,7 @@ namespace Happy.Weddings.Gateway.API.Filters
             {
                 context.Result = new ContentResult
                 {
-                    Content = $"Requests are limited to 1, every {Minutes} minutes.",
+                    Content = $"Requests are limited to 1, every {Seconds} seconds.",
                 };
 
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;

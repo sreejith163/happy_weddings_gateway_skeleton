@@ -75,10 +75,11 @@
             </summary>
             <param name="storyService">The story service.</param>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.GetStories">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.GetStories(Happy.Weddings.Gateway.Core.DTO.Blog.StoryParametersRequest)">
             <summary>
             Gets the stories.
             </summary>
+            <param name="storyParametersRequest">The story parameters request.</param>
             <returns></returns>
         </member>
         <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Blog.StoriesController.GetStory(System.Int32)">
@@ -320,9 +321,9 @@
             Gets or sets the name.
             </summary>
         </member>
-        <member name="P:Happy.Weddings.Gateway.API.Filters.RequestRateLimitAttribute.Minutes">
+        <member name="P:Happy.Weddings.Gateway.API.Filters.RequestRateLimitAttribute.Seconds">
             <summary>
-            Gets or sets the minutes.
+            Gets or sets the seconds.
             </summary>
         </member>
         <member name="P:Happy.Weddings.Gateway.API.Filters.RequestRateLimitAttribute.Cache">

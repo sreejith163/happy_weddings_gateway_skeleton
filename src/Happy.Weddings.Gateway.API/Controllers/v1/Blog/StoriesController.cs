@@ -34,12 +34,13 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         /// <summary>
         /// Gets the stories.
         /// </summary>
+        /// <param name="storyParametersRequest">The story parameters request.</param>
         /// <returns></returns>
         [HttpGet]
-        [RequestRateLimit(Name = "Limit Request Number", Minutes = 10)]
-        public async Task<IActionResult> GetStories()
+        [RequestRateLimit(Name = "Limit Request Number", Seconds = 1)]
+        public async Task<IActionResult> GetStories([FromQuery] StoryParametersRequest storyParametersRequest)
         {
-            var result = await storyService.GetStories();
+            var result = await storyService.GetStories(storyParametersRequest);
             return StatusCode((int)result.Code, result.Value);
         }
 
@@ -77,7 +78,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         /// <returns></returns>
         [Route("{storyId}")]
         [HttpPut]
-        [Authorize(Roles = "Admin, Vendor")]
+        //[Authorize(Roles = "Admin, Vendor")]
         public async Task<IActionResult> UpdateStory(int storyId, [FromBody] UpdateStoryRequest request)
         {
             var result = await storyService.UpdateStory(new StoryIdDetails(storyId), request);
@@ -91,7 +92,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Blog
         /// <returns></returns>
         [Route("{storyId}")]
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteStory(int storyId)
         {
             var result = await storyService.DeleteStory(new StoryIdDetails(storyId));
