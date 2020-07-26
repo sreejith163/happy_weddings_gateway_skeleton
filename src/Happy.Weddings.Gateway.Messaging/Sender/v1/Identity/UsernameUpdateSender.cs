@@ -39,13 +39,13 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// Initializes a new instance of the <see cref="UsernameUpdateSender"/> class.
         /// </summary>
         /// <param name="rabbitMqOptions">The rabbit mq options.</param>
-        public UsernameUpdateSender(IOptions<RabbitMqConfig> rabbitMqOptions)
+        public UsernameUpdateSender(RabbitMqConfig rabbitMqOptions)
         {
-            hostname = rabbitMqOptions.Value.Hostname;
-            username = rabbitMqOptions.Value.UserName;
-            password = rabbitMqOptions.Value.Password;
-            queueName = rabbitMqOptions.Value.QueueName;
-            exchangeName = rabbitMqOptions.Value.ExchangeName;
+            hostname = rabbitMqOptions.Hostname;
+            username = rabbitMqOptions.UserName;
+            password = rabbitMqOptions.Password;
+            queueName = rabbitMqOptions.QueueName;
+            exchangeName = rabbitMqOptions.ExchangeName;
         }
 
         /// <summary>
@@ -60,12 +60,12 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
             {
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                    channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
 
                     var json = JsonConvert.SerializeObject(user);
                     var body = Encoding.UTF8.GetBytes(json);
 
-                    channel.BasicPublish(exchange: exchangeName, routingKey: queueName, basicProperties: null, body: body);
+                    channel.BasicPublish(exchange: exchangeName, routingKey: "", basicProperties: null, body: body);
                 }
             }
         }
