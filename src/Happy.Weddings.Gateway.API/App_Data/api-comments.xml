@@ -132,7 +132,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.GetUser(System.Guid)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.GetUser(System.Int32)">
             <summary>
             Gets the user.
             </summary>
@@ -146,7 +146,7 @@
             <param name="request">The request.</param>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.UpdateUser(System.Guid,Happy.Weddings.Gateway.Core.DTO.Identity.UpdateUserRequest)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.UpdateUser(System.Int32,Happy.Weddings.Gateway.Core.DTO.Identity.UpdateUserRequest)">
             <summary>
             Updates the user.
             </summary>
@@ -154,7 +154,7 @@
             <param name="request">The request.</param>
             <returns></returns>
         </member>
-        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.DeleteUser(System.Guid)">
+        <member name="M:Happy.Weddings.Gateway.API.Controllers.v1.Identity.UsersController.DeleteUser(System.Int32)">
             <summary>
             Deletes the user.
             </summary>

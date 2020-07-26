@@ -31,7 +31,7 @@ namespace Happy.Weddings.Gateway.Core.Config.Identity
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public static string GetUser(Guid userId) => $"{baseUrl}/users/{userId}";
+        public static string GetUser(int userId) => $"{baseUrl}/users/{userId}";
 
         /// <summary>
         /// Creates the user.
@@ -45,13 +45,13 @@ namespace Happy.Weddings.Gateway.Core.Config.Identity
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public static string UpdateUser(Guid userId) => $"{baseUrl}/users/{userId}";
+        public static string UpdateUser(int userId) => $"{baseUrl}/users/{userId}";
 
         /// <summary>
         /// Deletes the user.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public static string DeleteUser(Guid userId) => $"{baseUrl}/users/{userId}";
+        public static string DeleteUser(int userId) => $"{baseUrl}/users/{userId}";
     }
 }

@@ -49,7 +49,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Identity
         /// <returns></returns>
         [Route("{userId}")]
         [HttpGet]
-        public async Task<IActionResult> GetUser(Guid userId)
+        public async Task<IActionResult> GetUser(int userId)
         {
             var result = await userService.GetUser(new UserIdDetails(userId));
             return StatusCode((int)result.Code, result.Value);
@@ -77,7 +77,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Identity
         [Route("{userId}")]
         [HttpPut]
         [Authorize(Roles = "Admin, Vendor")]
-        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UpdateUserRequest request)
+        public async Task<IActionResult> UpdateUser(int userId, [FromBody] UpdateUserRequest request)
         {
             var result = await userService.UpdateUser(new UserIdDetails(userId), request);
             return StatusCode((int)result.Code, result.Value);
@@ -91,7 +91,7 @@ namespace Happy.Weddings.Gateway.API.Controllers.v1.Identity
         [Route("{userId}")]
         [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteUser(Guid userId)
+        public async Task<IActionResult> DeleteUser(int userId)
         {
             var result = await userService.DeleteUser(new UserIdDetails(userId));
             return StatusCode((int)result.Code, result.Value);

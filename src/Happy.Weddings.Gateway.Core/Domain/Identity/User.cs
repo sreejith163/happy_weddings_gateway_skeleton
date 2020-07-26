@@ -7,7 +7,7 @@ namespace Happy.Weddings.Gateway.Core.Domain.Identity
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.

@@ -71,7 +71,7 @@ namespace Happy.Weddings.Gateway.API.AuthorizationRequirements
                     if (!string.IsNullOrEmpty(userIdClaim?.Value))
                     {
                         var client = httpClientFactory.CreateClient(IdentityServiceOperation.serviceName);
-                        var response = client.GetAsync(servicesConfig.Blog + IdentityServiceOperation.GetUser(Guid.Parse(userIdClaim?.Value))).Result;
+                        var response = client.GetAsync(servicesConfig.Blog + IdentityServiceOperation.GetUser(Convert.ToInt32(userIdClaim?.Value))).Result;
                         var result = JsonConvert.DeserializeObject<APIResponse>(response.Content.ReadAsStringAsync().Result);
 
                         if (result.Code == HttpStatusCode.OK)

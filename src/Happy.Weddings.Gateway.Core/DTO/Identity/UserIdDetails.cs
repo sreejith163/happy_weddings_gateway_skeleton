@@ -7,13 +7,13 @@ namespace Happy.Weddings.Gateway.Core.DTO.Identity
         /// <summary>
         /// Gets or sets the story identifier.
         /// </summary>
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserIdDetails" /> class.
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
-        public UserIdDetails(Guid userId)
+        public UserIdDetails(int userId)
         {
             UserId = userId;
         }
