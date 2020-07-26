@@ -56,14 +56,16 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
             var factory = new ConnectionFactory() { HostName = hostname, UserName = username, Password = password };
 
             using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
 
-                var json = JsonConvert.SerializeObject(user);
-                var body = Encoding.UTF8.GetBytes(json);
+                    var json = JsonConvert.SerializeObject(user);
+                    var body = Encoding.UTF8.GetBytes(json);
 
-                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                    channel.BasicPublish(exchange: exchangeName, routingKey: "", basicProperties: null, body: body);
+                }
             }
         }
     }
