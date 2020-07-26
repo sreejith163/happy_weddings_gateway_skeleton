@@ -59,6 +59,7 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
             {
                 using (var channel = connection.CreateModel())
                 {
+                    channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
                     channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
 
                     var json = JsonConvert.SerializeObject(user);
