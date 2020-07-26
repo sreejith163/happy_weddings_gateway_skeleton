@@ -13,22 +13,27 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// <summary>
         /// The hostname
         /// </summary>
-        private readonly string _hostname;
+        private readonly string hostname;
 
         /// <summary>
         /// The queue name
         /// </summary>
-        private readonly string _queueName;
+        private readonly string queueName;
+
+        /// <summary>
+        /// The exchange name
+        /// </summary>
+        private readonly string exchangeName;
 
         /// <summary>
         /// The username
         /// </summary>
-        private readonly string _username;
+        private readonly string username;
 
         /// <summary>
         /// The password
         /// </summary>
-        private readonly string _password;
+        private readonly string password;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsernameUpdateSender"/> class.
@@ -36,10 +41,11 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// <param name="rabbitMqOptions">The rabbit mq options.</param>
         public UsernameUpdateSender(IOptions<RabbitMqConfig> rabbitMqOptions)
         {
-            _hostname = rabbitMqOptions.Value.Hostname;
-            _username = rabbitMqOptions.Value.UserName;
-            _password = rabbitMqOptions.Value.Password;
-            _queueName = rabbitMqOptions.Value.QueueName;
+            hostname = rabbitMqOptions.Value.Hostname;
+            username = rabbitMqOptions.Value.UserName;
+            password = rabbitMqOptions.Value.Password;
+            queueName = rabbitMqOptions.Value.QueueName;
+            exchangeName = rabbitMqOptions.Value.ExchangeName;
         }
 
         /// <summary>
@@ -48,18 +54,18 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// <param name="user">The user.</param>
         public void SendUserName(User user)
         {
-            var messagefactory = new ConnectionFactory() { HostName = _hostname, UserName = _username, Password = _password };
+            var messagefactory = new ConnectionFactory() { HostName = hostname, UserName = username, Password = password };
 
             using (var connection = messagefactory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: _queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+                    channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
                     var json = JsonConvert.SerializeObject(user);
                     var body = Encoding.UTF8.GetBytes(json);
 
-                    channel.BasicPublish(exchange: "", routingKey: _queueName, basicProperties: null, body: body);
+                    channel.BasicPublish(exchange: exchangeName, routingKey: queueName, basicProperties: null, body: body);
                 }
             }
         }
