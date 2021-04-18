@@ -3,6 +3,7 @@ using Happy.Weddings.Gateway.Core.Infrastructure;
 using Happy.Weddings.Gateway.Core.Messaging.Sender.v1.Identity;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using System;
 using System.Text;
 
 namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
@@ -35,6 +36,11 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         private readonly string password;
 
         /// <summary>
+        /// The connection
+        /// </summary>
+        private IConnection connection;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UsernameUpdateSender"/> class.
         /// </summary>
         /// <param name="rabbitMqOptions">The rabbit mq options.</param>
@@ -45,6 +51,8 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
             password = rabbitMqOptions.Password;
             queueName = rabbitMqOptions.QueueName;
             exchangeName = rabbitMqOptions.ExchangeName;
+
+            CreateConnection();
         }
 
         /// <summary>
@@ -53,9 +61,7 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
         /// <param name="user">The user.</param>
         public void SendUserName(User user)
         {
-            var factory = new ConnectionFactory() { HostName = hostname, UserName = username, Password = password };
-
-            using (var connection = factory.CreateConnection())
+            if (ConnectionExists())
             {
                 using (var channel = connection.CreateModel())
                 {
@@ -68,6 +74,36 @@ namespace Happy.Weddings.Gateway.Messaging.Sender.v1.Identity
                     channel.BasicPublish(exchange: exchangeName, routingKey: "", basicProperties: null, body: body);
                 }
             }
+        }
+
+        private void CreateConnection()
+        {
+            try
+            {
+                var factory = new ConnectionFactory
+                {
+                    HostName = hostname,
+                    UserName = username,
+                    Password = password
+                };
+                connection = factory.CreateConnection();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Could not create connection: {ex.Message}");
+            }
+        }
+
+        private bool ConnectionExists()
+        {
+            if (connection != null)
+            {
+                return true;
+            }
+
+            CreateConnection();
+
+            return connection != null;
         }
     }
 }
